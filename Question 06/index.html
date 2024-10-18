@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animal Selector</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #915e5e;
+        }
+        img {
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+            width: 300px;
+            height: auto;
+            border-radius: 5%;
+        }
+        .container {
+            text-align: center;
+        }
+        select {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Animal Selector</h1>
+        <select onchange="imgChange()" name="animal" id="animal">
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="elephant">Elephant</option>
+            <option value="lion">Lion</option>
+        </select>
+        <br>
+        <img id="output" src="dog.jpg" alt="Selected Animal" />
+    </div>
+
+    <script>
+        const animalImages = {
+            dog: "dog.jpg",
+            cat: "cat.jpg",
+            elephant: "elephant.jpg",
+            lion: "lion.jpg"
+        };
+
+        const selectTag = document.getElementById("animal");
+        const img = document.getElementById("output");
+
+        // Ensure initial image is displayed
+        document.addEventListener("DOMContentLoaded", () => {
+            img.src = animalImages[selectTag.value];
+        });
+
+        // Change image based on selection
+        function imgChange() {
+            img.src = animalImages[selectTag.value];
+        }
+
+        // Handle broken image links
+        img.onerror = () => {
+            img.src = 'forest.jpg'; // Fallback image
+        };
+    </script>
+</body>
+</html>

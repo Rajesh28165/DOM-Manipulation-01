@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Analyzer Tool</title>
+  <style>
+    body{
+      background-color: aliceblue;
+    }
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding:20px 20px;
+      text-align: center;
+      background-color: antiquewhite;
+      box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
+    .container h1{
+        margin-top: 20px;
+    }
+    textarea {
+      width: 80%;
+      height: 70px;
+      margin-bottom: 20px;
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+      padding: 10px 10px;
+      border-radius: 10px;
+    }
+    .buttons {
+        display: flex;
+    }
+    .buttons button {
+      margin: 10px;
+      background-color: lightblue;
+      padding: 5px 7px;
+      border-radius: 5px;
+    }
+    .results {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 style="margin-top: 20px">Text Analyzer Tool</h1>
+    <textarea id="textInput" placeholder="Enter your text here..."></textarea>
+
+    <div class="buttons">
+      <button id="countWords">Count Words</button>
+      <button id="toUpperCase">Convert to UPPERCASE</button>
+      <button id="toLowerCase">Convert to lowercase</button>
+      <button id="checkSubstring">Check Substring</button>
+    </div>
+
+    <div class="results">
+      <p id="wordCountResult">Word Count: 0</p>
+      <p id="transformationResult">Transformed Text: </p>
+      <p id="substringResult">Substring Found: </p>
+    </div>
+  </div>
+
+<script>
+
+// Get element references
+const textInput = document.getElementById("textInput");
+const wordCountResult = document.getElementById("wordCountResult");
+const transformationResult  = document.getElementById("transformationResult");
+const substringResult = document.getElementById("substringResult");
+
+// Higher-order function for event listeners
+function attachEventListener (element, eventType, callback) {
+  element.addEventListener(eventType,callback);
+}
+
+// Function to count words
+function countWords() {
+  const text = textInput.value.trim();
+  const words = text ? text.split(/\s+/).length : 0;
+  wordCountResult.textContent = `Word Count: ${words}`;
+}
+
+// Function to convert text to uppercase
+function convertToUpperCase() {
+  const text = textInput.value.toUpperCase();
+  transformationResult.textContent = `Transformed Text: ${text}`;
+}
+
+// Function to convert text to lowercase
+function convertToLowerCase() {
+  const text = textInput.value.toLowerCase();
+  transformationResult.textContent = `Transformed Text: ${text}`;
+}
+
+// Function to check for a substring
+function checkSubstring() {
+  const substring = prompt("Enter any substring:");
+  const text = textInput.value;
+  const found = text.includes(substring);
+  substringResult.textContent = `Substring Found: ${found ? "Yes" : "No"}`;
+}
+
+// Attach event listeners using the higher-order function
+attachEventListener(document.getElementById('countWords'), 'click', countWords);
+attachEventListener(document.getElementById('toUpperCase'), 'click', convertToUpperCase);
+attachEventListener(document.getElementById('toLowerCase'), 'click', convertToLowerCase);
+attachEventListener(document.getElementById('checkSubstring'), 'click', checkSubstring);
+
+</script>
+
+</body>
+</html>
